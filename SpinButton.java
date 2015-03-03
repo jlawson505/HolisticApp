@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
+import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 
 /**
@@ -12,34 +13,44 @@ import android.widget.Button;
  */
 public class SpinButton extends Button
 {
-    AnimationSet set;
-    Animation spinAnimation;
+    AnimationSet introset;
 
-    int xAxis = 0;
-    int yAxis = 0;
+    Animation spinAnimation;
+    Animation scaleUpAnimation;
 
     public SpinButton(Context context, AttributeSet atts)
     {
         super(context, atts);
 
-        //set = new AnimationSet(true);
-        spinAnimation = new RotateAnimation(0f,360f,0,0);
-        spinAnimation.setDuration(1000);
-        //set.addAnimation(spinAnimation);
+        introset = new AnimationSet(true);
+
     }
+
 
     protected void onSizeChanged(int xNew, int yNew, int xOld, int yOld){
         super.onSizeChanged(xNew, yNew, xOld, yOld);
 
+
+        float scaleX = this.getScaleX();
+        float scaleY = this.getScaleY();
+
         spinAnimation = new RotateAnimation(0f,360f,xNew/2,yNew/2);
-        spinAnimation.setDuration(1000);
-        //set.addAnimation(spinAnimation);
+        spinAnimation.setDuration(500);
+
+        scaleUpAnimation = new ScaleAnimation(scaleX,2*scaleX,
+                scaleY,2*scaleY,xNew/2,yNew/2);
+        scaleUpAnimation.setDuration(500);
+
+
+
+        introset.addAnimation(spinAnimation);
+        introset.addAnimation(scaleUpAnimation);
 
     }
 
     public void spin()
     {
-        this.startAnimation(spinAnimation);
+         this.startAnimation(introset);
     }
 
 
