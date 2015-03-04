@@ -35,11 +35,11 @@ public class SpinButton extends Button
         float scaleY = this.getScaleY();
 
         //rotates the button 360 degrees
-        spinAnimation = new RotateAnimation(0f,360f,xNew/2,yNew/2);
+        spinAnimation = new RotateAnimation(0f,720f,xNew/2,yNew/2);
         spinAnimation.setDuration(500);
 
         //scale animation from original size to 3x size
-        scaleUpAnimation = new ScaleAnimation(scaleX,32*scaleX,
+        scaleUpAnimation = new ScaleAnimation(scaleX,3*scaleX,
                 scaleY,3*scaleY,xNew/2,yNew/2);
         scaleUpAnimation.setDuration(500);
 
